@@ -1,13 +1,48 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste JS</title>
+    <title>Simulador de Parcelas Decrescentes</title>
 </head>
 <body>
-    <h1>Consolidado das entregas parciais</h1>
+    <h1>Simulador de Parcelas Decrescentes</h1>
 
-    <script src="Entregas.js"></script>
+    <label for="parcelas">Digite o número de parcelas:</label>
+    <input type="number" id="parcelas" min="1">
+    <button onclick="calcularParcelas()">Calcular</button>
+
+    <h2>Detalhes das Parcelas</h2>
+    <div id="resultado"></div>
+
+    <script>
+        function calcularParcelas() {
+            const parcelasInput = document.getElementById("parcelas").value;
+            const numeroParcelas = parseInt(parcelasInput);
+
+            if (isNaN(numeroParcelas) || numeroParcelas <= 0) {
+                document.getElementById("resultado").textContent = "Por favor, insira um número válido de parcelas.";
+                return;
+            }
+
+            let valorTotal = 1000;
+            let valorParcela = valorTotal / numeroParcelas;
+            let resultadoHTML = "";
+
+            
+            for (let i = numeroParcelas; i > 0; i--) {
+                resultadoHTML += `<p>Parcela ${i}: R$ ${valorParcela.toFixed(2)}</p>`;
+
+                
+                let j = 1;
+                while (j <= 1) { 
+                    valorParcela *= 0.9;
+                    j++;
+                }
+            }
+
+            document.getElementById("resultado").innerHTML = resultadoHTML;
+        }
+    </script>
 </body>
 </html>
